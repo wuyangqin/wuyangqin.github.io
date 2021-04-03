@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="node学习记录（一）-node初识"><meta name="keywords" content="node"><meta name="author" content="Yangqin Wu"><meta name="copyright" content="Yangqin Wu"><title>node学习记录（一）-node初识 | Yang's Blog</title><link rel="shortcut icon" href="/yang-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '5.4.0'
+} </script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Yang's Blog" type="application/atom+xml">
+</head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">Node 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#node-js-%E4%B8%8D%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.</span> <span class="toc-text">node.js 不是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node-js%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.2.</span> <span class="toc-text">node.js是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E5%88%B0%E4%BA%86%E5%93%AA%E4%BA%9B%E6%8A%80%E6%9C%AF"><span class="toc-number">1.3.</span> <span class="toc-text">用到了哪些技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node%E7%89%B9%E7%82%B9"><span class="toc-number">1.4.</span> <span class="toc-text">Node特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">Node.js技术架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bingdings-%E8%AE%A9JS%E5%92%8CC-C-%E9%80%9A%E4%BF%A1"><span class="toc-number">2.0.1.</span> <span class="toc-text">bingdings 让JS和C&#x2F;C++通信</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#V8-JS%E5%BC%95%E6%93%8E"><span class="toc-number">2.0.2.</span> <span class="toc-text">V8 JS引擎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#libuv"><span class="toc-number">2.0.3.</span> <span class="toc-text">libuv</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Event-Loop"><span class="toc-number">2.1.</span> <span class="toc-text">Event Loop</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFloop"><span class="toc-number">2.1.1.</span> <span class="toc-text">什么是loop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event-Loop-1"><span class="toc-number">2.1.2.</span> <span class="toc-text">Event Loop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="toc-number">2.1.3.</span> <span class="toc-text">顺序示意图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.2.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Node-js%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">Node.js工作流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js-API"><span class="toc-number">3.</span> <span class="toc-text">Node.js API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API%E6%96%87%E6%A1%A3"><span class="toc-number">3.1.</span> <span class="toc-text">API文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8A%9F%E8%83%BD"><span class="toc-number">3.2.</span> <span class="toc-text">API有哪些功能</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://sf6-ttcdn-tos.pstatp.com/img/user-avatar/1899b33a1e9aced3316fd923f851a136~300x300.image"></div><div class="author-info__name text-center">Yangqin Wu</div><div class="author-info__description text-center"></div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/wuyangqin">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">15</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">15</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">9</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://wallroom.io/img/2560x1440/bg-c0174bb.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Yang's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">node学习记录（一）-node初识</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2021-03-24</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/node/">node</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1k</span><span class="post-meta__separator">|</span><span>Reading time: 3 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="Node-简介"><a href="#Node-简介" class="headerlink" title="Node 简介"></a>Node 简介</h2><h3 id="node-js-不是什么"><a href="#node-js-不是什么" class="headerlink" title="node.js 不是什么"></a>node.js 不是什么</h3><ul>
+<li>不是web后端框架</li>
+<li>不是编程语言</li>
+</ul>
+<h3 id="node-js是什么"><a href="#node-js是什么" class="headerlink" title="node.js是什么"></a>node.js是什么</h3><ul>
+<li>将多种技术组合起来</li>
+<li>让JavaScript也能调用系统接口、开发后端应用</li>
+</ul>
+<h3 id="用到了哪些技术"><a href="#用到了哪些技术" class="headerlink" title="用到了哪些技术"></a>用到了哪些技术</h3><ul>
+<li>V8引擎</li>
+<li>libuv</li>
+<li>C/C++实现的 c-ares(实现DNS 域名的解析)，http-parser(解析http)，OpenSSL(https)，zlib(加密)等库</li>
+</ul>
+<h3 id="Node特点"><a href="#Node特点" class="headerlink" title="Node特点"></a>Node特点</h3><p><strong>单线程</strong></p>
+<ul>
+<li>进程就是一个一个的工作计划（工厂中的车间）</li>
+<li>线程是计算机最小的运算单位（工厂中的工人），线程是干活的</li>
+<li>传统的服务器是多线程的，每进来一个请求，就创建一个线程去处理请求</li>
+<li>Node.js的服务器是单线程的，在后台拥有一个I/O线程池</li>
+</ul>
+<p><strong>非阻塞 I/O</strong></p>
+<ul>
+<li><p>I/O：对磁盘的读写操作( Input/ Output)</p>
+</li>
+<li><p>非阻塞：不会等I/O语句结束，而会执行后面的语句（异步）</p>
+<p>异步：调用者发起一个异步调用，然后立即返回去做别的事。“被调用者”通过状态、通知、回调函数等手段来通知“调用者”。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line">fs.readFile(<span class="string">&#x27;/app.js&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,file</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;我读完文件了！);</span></span><br><span class="line"><span class="string">&#125;)</span></span><br><span class="line"><span class="string">console.log(&#x27;</span>我不会被阻塞！<span class="string">&#x27;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">//我不会被阻塞是在我读完文件了之前输出 =&gt;异步调用</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">//机制:进行I/O操作，给readFile绑定一个回调函数function(err,file)&#123;&#125;,并在读取textfile完成后执行回调函数。期间，后面的代码继续执行，不受I/O阻塞</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>事件驱动</strong></p>
+<h2 id="Node-js技术架构"><a href="#Node-js技术架构" class="headerlink" title="Node.js技术架构"></a>Node.js技术架构</h2><p><img src="/images/node-notes/node-struct.png" alt="Node.js技术架构"></p>
+<p>stream模块</p>
+<ul>
+<li>第一层 可以用js直接调用的api</li>
+</ul>
+<h4 id="bingdings-让JS和C-C-通信"><a href="#bingdings-让JS和C-C-通信" class="headerlink" title="bingdings 让JS和C/C++通信"></a>bingdings 让JS和C/C++通信</h4><p>举例：</p>
+<ul>
+<li>C/C++实现了一个http_parser库，但不能用JS直接调用这个库，于是需要一个中间的销量</li>
+<li>Node.js用C++对该库进行封装，并用其提供的编译工具将该库编译为.node文件</li>
+<li>js代码可以直接require这个.node文件</li>
+<li>实现js调用C++库，中间的桥梁–binding</li>
+<li>Node.js提供了很多binding – bindings</li>
+</ul>
+<h4 id="V8-JS引擎"><a href="#V8-JS引擎" class="headerlink" title="V8 JS引擎"></a>V8 JS引擎</h4><ul>
+<li>功能<ul>
+<li>将JS源代码变成本地代码并执行</li>
+<li>维护调用栈，确保JS函数的执行顺序</li>
+<li>内存管理，为所有对象分配内存</li>
+<li>垃圾回收，重复利用无用的内存</li>
+<li>实现JS的标准库</li>
+</ul>
+</li>
+<li>注意<ul>
+<li>V8不提供 DOM API</li>
+<li>本身是多线程，如垃圾回收是单独线程，但执行JS是单线程的</li>
+<li>可以开启两个线程分别执行JS</li>
+<li>自带event loop，但Node.js基于liuv自己做了一个</li>
+</ul>
+</li>
+</ul>
+<h4 id="libuv"><a href="#libuv" class="headerlink" title="libuv"></a>libuv</h4><ul>
+<li>一个跨平台的异步I/O库，会根据系统自动选择合适的方案</li>
+<li>I/O:对磁盘的读写操作( Input/ Output)</li>
+<li>功能：可以用于 TCP/UDP/DNS/文件 等的异步操作<ul>
+<li>TCP：http是基于TCPIP，能操作TCP就能做服务器</li>
+<li>UDP：一般用于网页聊天</li>
+<li>DNS：域名</li>
+</ul>
+</li>
+</ul>
+<h3 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h3><h4 id="什么是loop"><a href="#什么是loop" class="headerlink" title="什么是loop"></a>什么是loop</h4><ul>
+<li>loop就是循环</li>
+<li>由于事件是分优先级的，所以处理起来也是分先后的</li>
+<li>node.js需要按顺序轮询每种事件</li>
+<li>这种轮询往往是循环的</li>
+</ul>
+<h4 id="Event-Loop-1"><a href="#Event-Loop-1" class="headerlink" title="Event Loop"></a>Event Loop</h4><ul>
+<li>对事件处理顺序的管理</li>
+</ul>
+<h4 id="顺序示意图"><a href="#顺序示意图" class="headerlink" title="顺序示意图"></a>顺序示意图</h4><p><img src="/images/node-notes/node-eventloop.png" alt="Event Loop图示"></p>
+<ul>
+<li>重点阶段<ul>
+<li>timers 检查计时器</li>
+<li>poll 轮询，检查系统时间</li>
+<li>check检查setImmediate回调</li>
+</ul>
+</li>
+<li>注意<ul>
+<li>大部分时间，Node.js都停在poll 轮询阶段</li>
+<li>大部分事件都在poll阶段被处理，如文件、网络请求</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>用libuv进行异步I/O操作</li>
+<li>用event loop管理事件处理顺序</li>
+<li>用C/C++库高效处理DNS/HTTP</li>
+<li>用bindings让JS能和C/C++沟通</li>
+<li>用V8运行JS</li>
+<li>用Node.js标准库简化JS</li>
+</ul>
+<h4 id="Node-js工作流程"><a href="#Node-js工作流程" class="headerlink" title="Node.js工作流程"></a>Node.js工作流程</h4><p><img src="/images/node-notes/node-progress.png" alt="Node.js工作流程图示"></p>
+<h2 id="Node-js-API"><a href="#Node-js-API" class="headerlink" title="Node.js API"></a>Node.js API</h2><h3 id="API文档"><a href="#API文档" class="headerlink" title="API文档"></a>API文档</h3><ul>
+<li>官方文档：<a target="_blank" rel="noopener" href="http://nodejs.cn/api/">http://nodejs.cn/api/</a></li>
+<li>民间版本： <a target="_blank" rel="noopener" href="https://devdocs.io/">https://devdocs.io/</a></li>
+</ul>
+<h3 id="API有哪些功能"><a href="#API有哪些功能" class="headerlink" title="API有哪些功能"></a>API有哪些功能</h3><ul>
+<li>assersion 断言</li>
+<li>testing</li>
+<li>async hooks</li>
+<li>*Buffer  一小段缓存</li>
+<li>*Child Processes 子进程</li>
+<li>*Cluster</li>
+<li>*Events 发布订阅模式</li>
+<li>*Debugger 调试</li>
+<li>*File System 文件系统 对文件的增删改查</li>
+<li>*Globals 全局变量</li>
+<li>*HTTP</li>
+<li>*Path 路径</li>
+<li>*Process 当前进程的相关信息</li>
+<li>*Query String </li>
+<li>*Stream 流格式</li>
+<li>*Timers</li>
+<li>*URL</li>
+<li>*Worker Threads   node10之后才有的</li>
+</ul>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/node/">node</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2021/03/31/node-notes-2-fs/"><i class="fa fa-chevron-left">  </i><span>node学习记录（二）-文件模块-制作一个使用命令行操作的todo list</span></a></div><div class="next-post pull-right"><a href="/2021/03/07/Vue3-3-dialog/"><span>Vue3造轮子（三）-Dialog组件</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://wallroom.io/img/2560x1440/bg-c0174bb.png)"><div class="layout" id="footer"><div class="copyright">&copy;2020 - 2021 By Yangqin Wu</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">キレイとは傷跡がないことじゃない 傷さえ愛しいというキセキだ</div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"superSample":2,"width":105,"height":210,"position":"right","hOffset":0,"vOffset":-20},"log":false,"tagMode":false});</script></body></html>
