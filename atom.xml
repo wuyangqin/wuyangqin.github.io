@@ -3,11 +3,11 @@
   <title>Yang&#39;s Blog</title>
   
   <subtitle>虹の先へ</subtitle>
-  <link href="https://amiemie906.gitee.io/atom.xml" rel="self"/>
+  <link href="https://wuyangqin.github.io/atom.xml" rel="self"/>
   
-  <link href="https://amiemie906.gitee.io/"/>
-  <updated>2021-03-31T10:30:02.490Z</updated>
-  <id>https://amiemie906.gitee.io/</id>
+  <link href="https://wuyangqin.github.io/"/>
+  <updated>2021-04-08T07:11:46.523Z</updated>
+  <id>https://wuyangqin.github.io/</id>
   
   <author>
     <name>Yangqin Wu</name>
@@ -17,11 +17,67 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>node学习记录（二）-文件模块-制作一个使用命令行操作的todo list</title>
-    <link href="https://amiemie906.gitee.io/2021/03/31/node-notes-2-fs/"/>
-    <id>https://amiemie906.gitee.io/2021/03/31/node-notes-2-fs/</id>
+    <title>VueCli3使用 Vue-Test-Utils + Karma / Chrome进行单元测试</title>
+    <link href="https://wuyangqin.github.io/2021/04/07/Vue-vue-test-utils/"/>
+    <id>https://wuyangqin.github.io/2021/04/07/Vue-vue-test-utils/</id>
+    <published>2021-04-07T15:39:49.000Z</published>
+    <updated>2021-04-08T07:11:46.523Z</updated>
+    
+    <content type="html"><![CDATA[<p>在<code>vue2</code>造UI轮子的项目中，因为<code>parcel</code>编译样式时速度有点慢，因此将其迁移到了<code>vue-cli3</code>，同时使用<code>Vue-Test-Utils</code>结合<code>Karma</code>对单元测试框架进行了升级。</p><h2 id="Vue-Test-Utils"><a href="#Vue-Test-Utils" class="headerlink" title="Vue-Test-Utils"></a>Vue-Test-Utils</h2><p><code>Vue Test Utils</code> 是 Vue.js 官方的单元测试实用工具库。</p><p><a href="https://vue-test-utils.vuejs.org/zh/guides/#%E8%B5%B7%E6%AD%A5">官方文档</a></p><p>首先尝试用Mocha+webpack编写单元测试，依然是使用Chai断言库。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在根目录新建tests/units目录，将原有的测试文件改为**.spec.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> chai, &#123;expect&#125; <span class="keyword">from</span> <span class="string">&#x27;chai&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123;shallowMount, mount&#125; <span class="keyword">from</span> <span class="string">&#x27;@vue/test-utils&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Button <span class="keyword">from</span> <span class="string">&#x27;@/components/button&#x27;</span></span><br><span class="line"></span><br><span class="line">describe(<span class="string">&#x27;Button&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    it(<span class="string">&#x27;可以设置icon.&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> wrapper = mount(Button, &#123;</span><br><span class="line">      propsData: &#123;</span><br><span class="line">        icon: <span class="string">&#x27;settings&#x27;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">const</span> useElement = wrapper.find(<span class="string">&#x27;use&#x27;</span>)</span><br><span class="line">    expect(useElement.attributes()[<span class="string">&#x27;href&#x27;</span>]).to.equal(<span class="string">&#x27;#x-settings&#x27;</span>)</span><br><span class="line">    wrapper.destroy()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="mount-V-S-shallowMount"><a href="#mount-V-S-shallowMount" class="headerlink" title="mount V.S. shallowMount"></a>mount V.S. shallowMount</h3><h4 id="mount"><a href="#mount" class="headerlink" title="mount()"></a>mount()</h4><ul><li><p><strong>参数：</strong></p><ul><li><code>&#123;Component&#125; component</code></li><li><code>&#123;Object&#125; options</code></li></ul></li><li><p><strong>返回值：</strong> <code>&#123;Wrapper&#125;</code></p></li><li><p><strong>选项：</strong>移步<a href="https://vue-test-utils.vuejs.org/zh/api/options.html">选项</a>，常用的有<code>propsData</code>,<code>slots</code>,<code>attachTo</code></p></li><li><p><strong>用法：</strong>创建一个包含被挂载和渲染的 Vue 组件的 <a href="https://vue-test-utils.vuejs.org/zh/api/wrapper/"><code>Wrapper</code></a>。</p></li></ul><h4 id="shallowMount"><a href="#shallowMount" class="headerlink" title="shallowMount()"></a>shallowMount()</h4><p>用法和 <code>mount</code> 一样，创建一个包含被挂载和渲染的 Vue 组件的 <code>Wrapper</code>，不同的是被存根的子组件。</p><h4 id="mount-和shallowMount-的区别"><a href="#mount-和shallowMount-的区别" class="headerlink" title="mount()和shallowMount()的区别"></a>mount()和shallowMount()的区别</h4><ul><li>参考这篇<a href="https://github.com/holylovelqq/vue-unit-test-with-jest/issues/4">笔记</a></li><li><code>mount()</code>会将测试组件中使用到的子子孙孙组件完全渲染，而<code>shallowMount()</code>不会</li><li>为保证测试速度，能用<code>shallowMount()</code>的地方都尽量用<code>mount()</code></li></ul><h2 id="为什么要使用Karma"><a href="#为什么要使用Karma" class="headerlink" title="为什么要使用Karma"></a>为什么要使用Karma</h2><p>将原来<code>button.spec.js</code> 测试用例复制过来后，发现涉及到了样式的测试都未通过</p><p><img src="/images/vue/test-error1.png"></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 样式相关的测试用例</span></span><br><span class="line">it(<span class="string">&#x27;icon 默认的 order 是 1&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> wrapper = mount(Button, &#123;</span><br><span class="line">    propsData: &#123;</span><br><span class="line">      icon: <span class="string">&#x27;setting&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> vm = wrapper.vm</span><br><span class="line">  <span class="keyword">const</span> icon = vm.$el.querySelector(<span class="string">&#x27;svg&#x27;</span>)</span><br><span class="line">  expect(getComputedStyle(icon).order).to.eq(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>原因是这个测试框架是运行在node.js里，而非运行在浏览器，所以没有DOM，无法得到元素的样式。</p><p>官方文档中提到<code>attachTo:htmlELement</code>可以将元素设置到DOM中，然而添加后测试依然不通过。</p><p>因此，为了解决这个问题，需要使用<code>Krama</code><strong>启动浏览器</strong>运行测试。</p><h3 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h3><h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D karma karma-chrome-launcher karma-mocha karma-sourcemap-loader karma-spec-reporter karma-webpack chai sinon sinon-chai</span><br></pre></td></tr></table></figure><h4 id="创建karma-conf-js"><a href="#创建karma-conf-js" class="headerlink" title="创建karma.conf.js"></a>创建karma.conf.js</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// karma.conf.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> webpackConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.config.js&#x27;</span>)</span><br><span class="line"><span class="comment">// var webpackConfig = require(&#x27;@vue/cli-service/webpack.config.js&#x27;) // 如果没有配置webpack.config.js</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  config.set(&#123;</span><br><span class="line">    frameworks: [<span class="string">&#x27;mocha&#x27;</span>],</span><br><span class="line"></span><br><span class="line">    files: [<span class="string">&#x27;test/**/*.spec.js&#x27;</span>],</span><br><span class="line"></span><br><span class="line">    preprocessors: &#123;</span><br><span class="line">      <span class="string">&#x27;**/*.spec.js&#x27;</span>: [<span class="string">&#x27;webpack&#x27;</span>, <span class="string">&#x27;sourcemap&#x27;</span>]</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    webpack: webpackConfig,</span><br><span class="line"></span><br><span class="line">    reporters: [<span class="string">&#x27;spec&#x27;</span>],</span><br><span class="line">    autoWatch: <span class="literal">true</span>,</span><br><span class="line">    browsers: [<span class="string">&#x27;ChromeHeadless&#x27;</span>]</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="配置package-json"><a href="#配置package-json" class="headerlink" title="配置package.json"></a>配置package.json</h4><p>在 <code>package.json</code> 定义测试脚本</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">   <span class="string">&quot;test&quot;</span>: <span class="string">&quot;karma start --single-run&quot;</span>, <span class="comment">// 运行一次</span></span><br><span class="line">   <span class="string">&quot;test:unit&quot;</span>: <span class="string">&quot;karma start&quot;</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><h3 id="编写测试用例"><a href="#编写测试用例" class="headerlink" title="编写测试用例"></a>编写测试用例</h3><p>添加karma后，将样式相关的测试用例重新编写，举个栗子：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">it(<span class="string">&#x27;icon 默认的 order 是 1&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> div = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(div)</span><br><span class="line">  <span class="keyword">const</span> wrapper = mount(Button, &#123;</span><br><span class="line">    attachTo: div,</span><br><span class="line">    propsData: &#123;</span><br><span class="line">      icon: <span class="string">&#x27;settings&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">const</span> vm = wrapper.vm</span><br><span class="line">  <span class="keyword">const</span> icon = vm.$el.querySelector(<span class="string">&#x27;svg&#x27;</span>)</span><br><span class="line">  expect(getComputedStyle(icon).order).to.eq(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">  div.remove()</span><br><span class="line">  wrapper.destroy()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p><img src="/images/vue/test-s.png" alt="测试通过啦"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在&lt;code&gt;vue2&lt;/code&gt;造UI轮子的项目中，因为&lt;code&gt;parcel&lt;/code&gt;编译样式时速度有点慢，因此将其迁移到了&lt;code&gt;vue-cli3&lt;/code&gt;，同时使用&lt;code&gt;Vue-Test-Utils&lt;/code&gt;结合&lt;code&gt;Karma&lt;/c</summary>
+      
+    
+    
+    
+    <category term="Vue" scheme="https://wuyangqin.github.io/categories/Vue/"/>
+    
+    <category term="Vue2" scheme="https://wuyangqin.github.io/categories/Vue/Vue2/"/>
+    
+    
+    <category term="Vue" scheme="https://wuyangqin.github.io/tags/Vue/"/>
+    
+    <category term="Vue2" scheme="https://wuyangqin.github.io/tags/Vue2/"/>
+    
+    <category term="造轮子" scheme="https://wuyangqin.github.io/tags/%E9%80%A0%E8%BD%AE%E5%AD%90/"/>
+    
+    <category term="单元测试" scheme="https://wuyangqin.github.io/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue小技巧之属性、事件传递：v-bind=&quot;$props&quot;，v-bind=&quot;$attrs&quot;，v-on=&quot;$listeners&quot;</title>
+    <link href="https://wuyangqin.github.io/2021/04/02/Vue-v-bind-props/"/>
+    <id>https://wuyangqin.github.io/2021/04/02/Vue-v-bind-props/</id>
+    <published>2021-04-02T14:39:49.000Z</published>
+    <updated>2021-04-06T08:40:35.537Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天接手了另一位同事的代码改一个需求时，发现这个需求涉及到的组件层层嵌套，<code>props</code>也得层层传递，如图所示：</p><p><img src="/images/vue/props%E7%A9%BF%E9%80%8F.png"></p><p>从A组件传递的<code>props</code>需要分别传递到第二第三层组件中使用。如果我改这个需求得添加一个属性，就意味着我需要在ABCDE…这几个组件调用的地方分别加上这个属性。想想就非常不优雅：不仅费时，也不利于以后的拓展和维护。那么有什么方法可以优化呢？</p><p>正好前段时间写Vue3UI轮子button组件的时候，用到了<code>v-bind=&quot;$attrs&quot;</code>来将属性和事件绑定给子组件。于是进行了一番探索(搜博客+查阅文档)，发现<code>vue2</code>中也有类似的操作，分别是通过<code>v-bind=&quot;$props&quot;</code>,<code>v-bind=&quot;$attrs&quot;</code>传递属性，通过<code>v-on=&quot;$listeners&quot;</code>传递事件。</p><h2 id="使用介绍"><a href="#使用介绍" class="headerlink" title="使用介绍"></a>使用介绍</h2><h3 id="v-bind-”-props”"><a href="#v-bind-”-props”" class="headerlink" title="v-bind=”$props”"></a>v-bind=”$props”</h3><ul><li><p><code>vm.$props</code>: 当前组件接收到的 props 对象。Vue 实例代理了对其 props 对象属性的访问</p></li><li><p><code>v-bind=&quot;$props&quot;</code>将父组件的所有props向下传递给它的子组件,子组件需要在其props:{} 中定义要接受的props</p></li></ul><h3 id="v-bind-”-attrs”"><a href="#v-bind-”-attrs”" class="headerlink" title="v-bind=”$attrs”"></a>v-bind=”$attrs”</h3><ul><li><code>vm.$attrs</code> :包含了父作用域中不作为 prop 被识别 (且获取) 的特性绑定 (class 和 style 除外)。当一个组件没有声明任何 prop 时，这里会包含所有父作用域的绑定 (class 和 style 除外)</li><li><code>v-bind=&quot;$attrs&quot;</code>： 将调用组件时，组件标签上绑定的非props特性(class和style除外)向下传递</li></ul><h3 id="v-on-”-listeners”"><a href="#v-on-”-listeners”" class="headerlink" title="v-on=”$listeners”"></a>v-on=”$listeners”</h3><ul><li><code>vm.$listeners</code>: 包含了父作用域中的 (不含 .native 修饰器的) v-on 事件监听器。它可以通过 v-on=”$listeners” 传入内部组件</li><li><code>v-on=&quot;$listeners&quot;</code>：将父组件标签上的自定义事件向下传递,其子组件可以直接通过this.$emit(eventName)的方式调用</li></ul><p><strong>注：<code>Vue3</code>中移除了<code>$listeners</code>，而将事件存在了<code>vm.$attrs</code>中</strong></p><h2 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h2><ul><li><p>index.vue</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;Parent test=<span class="string">&quot;非props属性&quot;</span> :name=<span class="string">&quot;name&quot;</span> :age=<span class="string">&quot;age&quot;</span> v-on:start1=<span class="string">&quot;fn1&quot;</span> @start2=<span class="string">&quot;fn2&quot;</span>&gt;</span><br><span class="line">    &lt;/Parent&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">  </span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">import</span> Parent <span class="keyword">from</span> <span class="string">&#x27;./parent.vue&#x27;</span>;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    components: &#123;</span><br><span class="line">      Parent</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">          name: <span class="string">&#x27;爷爷给爸爸的值&#x27;</span>,</span><br><span class="line">          age: <span class="string">&#x27;18&#x27;</span></span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        <span class="function"><span class="title">fn1</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;这是从爷爷传来的方法1&#x27;</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="function"><span class="title">fn2</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;这是从爷爷传来的方法2&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li><li><p>parent.vue</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">      &lt;h3&gt;父组件&lt;/h3&gt;</span><br><span class="line">      &lt;div&gt;非props属性($attrs): &#123;&#123;$attrs&#125;&#125;&lt;/div&gt;</span><br><span class="line">      &lt;child v-on=<span class="string">&quot;$listeners&quot;</span> v-bind=<span class="string">&quot;$props&quot;</span>&gt;&lt;/child&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">  </span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">import</span> Child <span class="keyword">from</span> <span class="string">&#x27;./child.vue&#x27;</span>;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    inheritAttrs: <span class="literal">false</span>,</span><br><span class="line">    components: &#123;</span><br><span class="line">      Child</span><br><span class="line">    &#125;,</span><br><span class="line">    props: [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>],</span><br><span class="line">    <span class="function"><span class="title">mounted</span>(<span class="params"></span>)</span> &#123; </span><br><span class="line">        <span class="built_in">this</span>.$emit(<span class="string">&#x27;start1&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li><li><p>child.vue</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">      &lt;h3&gt;子组件&lt;/h3&gt;</span><br><span class="line">      &lt;div&gt;爸爸传递过来的name: &#123;&#123;name&#125;&#125;&lt;/div&gt;</span><br><span class="line">      &lt;div&gt;爸爸传递过来的age: &#123;&#123;age&#125;&#125;&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">  </span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    props: [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>],</span><br><span class="line">    <span class="function"><span class="title">mounted</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.$emit(<span class="string">&#x27;start2&#x27;</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.$listeners, <span class="string">&#x27;儿子的事件&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li></ul><p>效果如下：</p><p><img src="/images/vue/props%E7%A9%BF%E9%80%8F1.png"></p><p><img src="/images/vue/props%E7%A9%BF%E9%80%8F2.png"></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://juejin.cn/post/6844903848050589704#heading-4">https://juejin.cn/post/6844903848050589704#heading-4</a></p><p><a href="https://cn.vuejs.org/v2/api/#v-on">https://cn.vuejs.org/v2/api/?#v-on</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;今天接手了另一位同事的代码改一个需求时，发现这个需求涉及到的组件层层嵌套，&lt;code&gt;props&lt;/code&gt;也得层层传递，如图所示：&lt;/p</summary>
+      
+    
+    
+    
+    <category term="Vue" scheme="https://wuyangqin.github.io/categories/Vue/"/>
+    
+    
+    <category term="Vue" scheme="https://wuyangqin.github.io/tags/Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>node学习记录（2）-文件模块-制作一个使用命令行操作的todo list</title>
+    <link href="https://wuyangqin.github.io/2021/03/31/node-notes-2-fs/"/>
+    <id>https://wuyangqin.github.io/2021/03/31/node-notes-2-fs/</id>
     <published>2021-03-31T15:32:01.000Z</published>
-    <updated>2021-03-31T10:30:02.490Z</updated>
+    <updated>2021-04-13T06:38:30.910Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p>源码链接：<a href="https://github.com/wuyangqin/node-todo-list">https://github.com/wuyangqin/node-todo-list</a></p></blockquote><p>使用node的<code>fs</code>文件模块实现了一个简单的用命令行操作的todo list</p><h2 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h2><ul><li>使用node.js <code>fs</code>模块实现文件读写</li><li>使用<code>commander.js</code>编写命令行命令</li><li>使用<code>inquirer.js</code> 实现用户与命令行的交互 </li><li>使用<code>jest.js</code> 模拟fs，编写单元测试</li></ul><h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g node-todo-xx</span><br></pre></td></tr></table></figure><p>or</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global add node-todo-xx</span><br></pre></td></tr></table></figure><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">todo <span class="comment"># 查看所有任务列表,能够操作任务增删改查</span></span><br><span class="line">todo add 任务名 <span class="comment"># 添加一个任务</span></span><br><span class="line">todo clear <span class="comment"># 清空所有任务</span></span><br></pre></td></tr></table></figure><p><strong>todo 查看任务列表</strong></p><p><img src="/images/node-notes/fs-todo.png" alt="查看任务列表"></p><p><img src="/images/node-notes/fs-todo-onetask.png" alt="对某项任务进行操作"></p><p><strong>todo add 添加任务</strong></p><p><img src="/images/node-notes/fs-todo-add.png" alt="添加任务"></p><p><strong>todo clear 清除任务</strong></p><p><img src="/images/node-notes/fs-todo-clear.png" alt="添加任务"></p><h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><h3 id="逻辑梳理"><a href="#逻辑梳理" class="headerlink" title="逻辑梳理"></a>逻辑梳理</h3><p>该项目的实现逻辑如图所示：</p><p><img src="/images/node-notes/todo-logic.png"></p><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── __mocks__</span><br><span class="line">|  └── fs.js  <span class="comment"># 模拟fs模块</span></span><br><span class="line">├── __test__  <span class="comment"># 存放测试文件</span></span><br><span class="line">|  └── db.test.js</span><br><span class="line">├── cli.js <span class="comment"># 命令行操作逻辑</span></span><br><span class="line">├── db.js <span class="comment"># 读写任务的函数</span></span><br><span class="line">└── index.js <span class="comment"># 任务的操作逻辑</span></span><br></pre></td></tr></table></figure><h3 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> os = <span class="built_in">require</span>(<span class="string">&#x27;os&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> homedir = os.homedir(); <span class="comment">// 获取home目录</span></span><br><span class="line"><span class="keyword">const</span> home = process.env.HOME || homedir; <span class="comment">// 如果用户自己设置了HOME的环境变量</span></span><br><span class="line"><span class="keyword">const</span> dbPath = path.join(home,<span class="string">&#x27;.todo&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> db = &#123;</span><br><span class="line">  <span class="function"><span class="title">read</span>(<span class="params">path = dbPath</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// &#x27;a+&#x27;: Open file for reading and appending. The file is created if it does not exist.</span></span><br><span class="line">      fs.readFile(path,&#123; <span class="attr">flag</span>: <span class="string">&#x27;a+&#x27;</span>&#125;, <span class="function">(<span class="params">readError,data</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (readError) <span class="keyword">return</span> reject(readError)</span><br><span class="line">        <span class="keyword">let</span> list</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          list = <span class="built_in">JSON</span>.parse(data.toString())</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">          list = []</span><br><span class="line">        &#125;</span><br><span class="line">        resolve(list)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">write</span>(<span class="params">list, path = dbPath</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> string = <span class="built_in">JSON</span>.stringify(list)</span><br><span class="line">      fs.writeFile(path,string + <span class="string">&#x27;\n&#x27;</span>,<span class="function">(<span class="params">writeError</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(writeError) <span class="keyword">return</span> reject(writeError)</span><br><span class="line">        resolve()</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports  = db</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><h4 id="测试命令"><a href="#测试命令" class="headerlink" title="测试命令"></a>测试命令</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn <span class="built_in">test</span></span><br></pre></td></tr></table></figure><h4 id="fs-mock"><a href="#fs-mock" class="headerlink" title="fs mock"></a>fs mock</h4><p>从上面的逻辑梳理图可以看到，这个项目最主要的就是对任务文件进行操作的两个函数，因此将围绕这两个函数进行单元测试的编写。</p><p>然而编写单元测试有一条原则就是，<strong>测试代码不要与外界进行交互</strong>，比如如果我通过测试代码读取用户硬盘上的某个文件，而这个文件路径刚好在用户硬盘中存在，这就很尴尬啦。因此<code>jest</code>提供了对node模块进行<code>mock</code>的功能——相当于对node的模块进行接管，调用我们自己编写的方法。具体实现如下：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在项目根目录创建&#x27;__mock__&#x27;文件夹, 并创建&#x27;fs.js&#x27;文件 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fs = jest.genMockFromModule(<span class="string">&#x27;fs&#x27;</span>) <span class="comment">// 创建模拟的fs模块</span></span><br><span class="line"><span class="keyword">const</span> _fs = jest.requireActual(<span class="string">&#x27;fs&#x27;</span>) <span class="comment">// 引入实际的fs模块</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.assign(fs, _fs) <span class="comment">// 将原fs模块的属性复制给我们创建的模拟fs模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> readMocks = &#123;&#125;</span><br><span class="line">fs.setReadFileMock = <span class="function">(<span class="params">path, error, data</span>) =&gt;</span> &#123;</span><br><span class="line">  readMocks[path] = [error, data]</span><br><span class="line">&#125;</span><br><span class="line">fs.readFile = <span class="function">(<span class="params">path,options,callback</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (callback === <span class="literal">undefined</span>) callback = options</span><br><span class="line">  <span class="keyword">if</span> (path <span class="keyword">in</span> readMocks) &#123;</span><br><span class="line">    callback(...readMocks[path])</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    _fs.readFile(path, options, callback)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> writeMocks = &#123;&#125;</span><br><span class="line">fs.setWriteFileMock = <span class="function">(<span class="params">path, fn</span>) =&gt;</span> &#123;</span><br><span class="line">  writeMocks[path] = fn</span><br><span class="line">&#125;</span><br><span class="line">fs.writeFile  = <span class="function">(<span class="params">path, data, options, callback</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (callback === <span class="literal">undefined</span>) callback = options</span><br><span class="line">  <span class="keyword">if</span> (path <span class="keyword">in</span> writeMocks) &#123;</span><br><span class="line">    writeMocks[path](path, data, options, callback)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    _fs.writeFile(path, data, options, callback)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fs.clearMocks = <span class="function">() =&gt;</span> &#123; <span class="comment">// 清除mock</span></span><br><span class="line">  readMocks = &#123;&#125;</span><br><span class="line">  writeMocks = &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = fs</span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// __test__文件夹用来存放测试文件，在&#x27;db.spec.js&#x27;中编写读写文件两个函数的测试代码</span></span><br><span class="line"><span class="keyword">const</span> db = <span class="built_in">require</span>(<span class="string">&#x27;../db.js&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line">jest.mock(<span class="string">&#x27;fs&#x27;</span>) <span class="comment">// jest将fs接管</span></span><br><span class="line"></span><br><span class="line">describe(<span class="string">&#x27;db&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  afterEach(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    fs.clearMocks()</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  it (<span class="string">&#x27;can read&#x27;</span>, <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> data = [&#123;<span class="attr">title</span>: <span class="string">&#x27;hi&#x27;</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;]</span><br><span class="line">    fs.setReadFileMock(<span class="string">&#x27;/test&#x27;</span>,<span class="literal">null</span>, <span class="built_in">JSON</span>.stringify(data))</span><br><span class="line">    <span class="keyword">const</span> list = <span class="keyword">await</span> db.read(<span class="string">&#x27;/test&#x27;</span>)</span><br><span class="line">    expect(list).toStrictEqual(data)</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  it (<span class="string">&#x27;can write&#x27;</span>, <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> fakeFile</span><br><span class="line">    fs.setWriteFileMock(<span class="string">&#x27;/test1&#x27;</span>, <span class="function">(<span class="params">path, data, callback</span>) =&gt;</span> &#123;</span><br><span class="line">      fakeFile = data</span><br><span class="line">      callback(<span class="literal">null</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">const</span> list = [&#123;<span class="attr">title</span>: <span class="string">&#x27;hi&#x27;</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;]</span><br><span class="line">    <span class="keyword">await</span> db.write(list,<span class="string">&#x27;/test1&#x27;</span>)</span><br><span class="line">    expect(fakeFile).toBe(<span class="built_in">JSON</span>.stringify(list) + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
     
@@ -35,19 +91,19 @@
     
     
     
-    <category term="node" scheme="https://amiemie906.gitee.io/categories/node/"/>
+    <category term="node" scheme="https://wuyangqin.github.io/categories/node/"/>
     
     
-    <category term="node" scheme="https://amiemie906.gitee.io/tags/node/"/>
+    <category term="node" scheme="https://wuyangqin.github.io/tags/node/"/>
     
   </entry>
   
   <entry>
-    <title>node学习记录（一）-node初识</title>
-    <link href="https://amiemie906.gitee.io/2021/03/24/node-notes-1-intro/"/>
-    <id>https://amiemie906.gitee.io/2021/03/24/node-notes-1-intro/</id>
+    <title>node学习记录（1）-node初识</title>
+    <link href="https://wuyangqin.github.io/2021/03/24/node-notes-1-intro/"/>
+    <id>https://wuyangqin.github.io/2021/03/24/node-notes-1-intro/</id>
     <published>2021-03-24T12:05:01.000Z</published>
-    <updated>2021-03-31T08:34:09.096Z</updated>
+    <updated>2021-04-13T06:38:24.675Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Node-简介"><a href="#Node-简介" class="headerlink" title="Node 简介"></a>Node 简介</h2><h3 id="node-js-不是什么"><a href="#node-js-不是什么" class="headerlink" title="node.js 不是什么"></a>node.js 不是什么</h3><ul><li>不是web后端框架</li><li>不是编程语言</li></ul><h3 id="node-js是什么"><a href="#node-js是什么" class="headerlink" title="node.js是什么"></a>node.js是什么</h3><ul><li>将多种技术组合起来</li><li>让JavaScript也能调用系统接口、开发后端应用</li></ul><h3 id="用到了哪些技术"><a href="#用到了哪些技术" class="headerlink" title="用到了哪些技术"></a>用到了哪些技术</h3><ul><li>V8引擎</li><li>libuv</li><li>C/C++实现的 c-ares(实现DNS 域名的解析)，http-parser(解析http)，OpenSSL(https)，zlib(加密)等库</li></ul><h3 id="Node特点"><a href="#Node特点" class="headerlink" title="Node特点"></a>Node特点</h3><p><strong>单线程</strong></p><ul><li>进程就是一个一个的工作计划（工厂中的车间）</li><li>线程是计算机最小的运算单位（工厂中的工人），线程是干活的</li><li>传统的服务器是多线程的，每进来一个请求，就创建一个线程去处理请求</li><li>Node.js的服务器是单线程的，在后台拥有一个I/O线程池</li></ul><p><strong>非阻塞 I/O</strong></p><ul><li><p>I/O：对磁盘的读写操作( Input/ Output)</p></li><li><p>非阻塞：不会等I/O语句结束，而会执行后面的语句（异步）</p><p>异步：调用者发起一个异步调用，然后立即返回去做别的事。“被调用者”通过状态、通知、回调函数等手段来通知“调用者”。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line">fs.readFile(<span class="string">&#x27;/app.js&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,file</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;我读完文件了！);</span></span><br><span class="line"><span class="string">&#125;)</span></span><br><span class="line"><span class="string">console.log(&#x27;</span>我不会被阻塞！<span class="string">&#x27;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">//我不会被阻塞是在我读完文件了之前输出 =&gt;异步调用</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">//机制:进行I/O操作，给readFile绑定一个回调函数function(err,file)&#123;&#125;,并在读取textfile完成后执行回调函数。期间，后面的代码继续执行，不受I/O阻塞</span></span><br></pre></td></tr></table></figure></li></ul><p><strong>事件驱动</strong></p><h2 id="Node-js技术架构"><a href="#Node-js技术架构" class="headerlink" title="Node.js技术架构"></a>Node.js技术架构</h2><p><img src="/images/node-notes/node-struct.png" alt="Node.js技术架构"></p><p>stream模块</p><ul><li>第一层 可以用js直接调用的api</li></ul><h4 id="bingdings-让JS和C-C-通信"><a href="#bingdings-让JS和C-C-通信" class="headerlink" title="bingdings 让JS和C/C++通信"></a>bingdings 让JS和C/C++通信</h4><p>举例：</p><ul><li>C/C++实现了一个http_parser库，但不能用JS直接调用这个库，于是需要一个中间的销量</li><li>Node.js用C++对该库进行封装，并用其提供的编译工具将该库编译为.node文件</li><li>js代码可以直接require这个.node文件</li><li>实现js调用C++库，中间的桥梁–binding</li><li>Node.js提供了很多binding – bindings</li></ul><h4 id="V8-JS引擎"><a href="#V8-JS引擎" class="headerlink" title="V8 JS引擎"></a>V8 JS引擎</h4><ul><li>功能<ul><li>将JS源代码变成本地代码并执行</li><li>维护调用栈，确保JS函数的执行顺序</li><li>内存管理，为所有对象分配内存</li><li>垃圾回收，重复利用无用的内存</li><li>实现JS的标准库</li></ul></li><li>注意<ul><li>V8不提供 DOM API</li><li>本身是多线程，如垃圾回收是单独线程，但执行JS是单线程的</li><li>可以开启两个线程分别执行JS</li><li>自带event loop，但Node.js基于liuv自己做了一个</li></ul></li></ul><h4 id="libuv"><a href="#libuv" class="headerlink" title="libuv"></a>libuv</h4><ul><li>一个跨平台的异步I/O库，会根据系统自动选择合适的方案</li><li>I/O:对磁盘的读写操作( Input/ Output)</li><li>功能：可以用于 TCP/UDP/DNS/文件 等的异步操作<ul><li>TCP：http是基于TCPIP，能操作TCP就能做服务器</li><li>UDP：一般用于网页聊天</li><li>DNS：域名</li></ul></li></ul><h3 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h3><h4 id="什么是loop"><a href="#什么是loop" class="headerlink" title="什么是loop"></a>什么是loop</h4><ul><li>loop就是循环</li><li>由于事件是分优先级的，所以处理起来也是分先后的</li><li>node.js需要按顺序轮询每种事件</li><li>这种轮询往往是循环的</li></ul><h4 id="Event-Loop-1"><a href="#Event-Loop-1" class="headerlink" title="Event Loop"></a>Event Loop</h4><ul><li>对事件处理顺序的管理</li></ul><h4 id="顺序示意图"><a href="#顺序示意图" class="headerlink" title="顺序示意图"></a>顺序示意图</h4><p><img src="/images/node-notes/node-eventloop.png" alt="Event Loop图示"></p><ul><li>重点阶段<ul><li>timers 检查计时器</li><li>poll 轮询，检查系统时间</li><li>check检查setImmediate回调</li></ul></li><li>注意<ul><li>大部分时间，Node.js都停在poll 轮询阶段</li><li>大部分事件都在poll阶段被处理，如文件、网络请求</li></ul></li></ul><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul><li>用libuv进行异步I/O操作</li><li>用event loop管理事件处理顺序</li><li>用C/C++库高效处理DNS/HTTP</li><li>用bindings让JS能和C/C++沟通</li><li>用V8运行JS</li><li>用Node.js标准库简化JS</li></ul><h4 id="Node-js工作流程"><a href="#Node-js工作流程" class="headerlink" title="Node.js工作流程"></a>Node.js工作流程</h4><p><img src="/images/node-notes/node-progress.png" alt="Node.js工作流程图示"></p><h2 id="Node-js-API"><a href="#Node-js-API" class="headerlink" title="Node.js API"></a>Node.js API</h2><h3 id="API文档"><a href="#API文档" class="headerlink" title="API文档"></a>API文档</h3><ul><li>官方文档：<a href="http://nodejs.cn/api/">http://nodejs.cn/api/</a></li><li>民间版本： <a href="https://devdocs.io/">https://devdocs.io/</a></li></ul><h3 id="API有哪些功能"><a href="#API有哪些功能" class="headerlink" title="API有哪些功能"></a>API有哪些功能</h3><ul><li>assersion 断言</li><li>testing</li><li>async hooks</li><li>*Buffer  一小段缓存</li><li>*Child Processes 子进程</li><li>*Cluster</li><li>*Events 发布订阅模式</li><li>*Debugger 调试</li><li>*File System 文件系统 对文件的增删改查</li><li>*Globals 全局变量</li><li>*HTTP</li><li>*Path 路径</li><li>*Process 当前进程的相关信息</li><li>*Query String </li><li>*Stream 流格式</li><li>*Timers</li><li>*URL</li><li>*Worker Threads   node10之后才有的</li></ul>]]></content>
     
@@ -59,17 +115,48 @@
     
     
     
-    <category term="node" scheme="https://amiemie906.gitee.io/categories/node/"/>
+    <category term="node" scheme="https://wuyangqin.github.io/categories/node/"/>
     
     
-    <category term="node" scheme="https://amiemie906.gitee.io/tags/node/"/>
+    <category term="node" scheme="https://wuyangqin.github.io/tags/node/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue3造轮子（四）-Tabs组件</title>
+    <link href="https://wuyangqin.github.io/2021/03/16/Vue3-4-tabs/"/>
+    <id>https://wuyangqin.github.io/2021/03/16/Vue3-4-tabs/</id>
+    <published>2021-03-16T15:11:05.000Z</published>
+    <updated>2021-04-13T14:59:00.883Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="效果预览"><a href="#效果预览" class="headerlink" title="效果预览"></a>效果预览</h2><p><img src="/images/vue3-tabs/tabs.gif"></p><p><a href="https://github.com/wuyangqin/xing-ui-v3">代码链接</a></p><p><a href="https://github.com/wuyangqin/xing-ui-v3/commits/07da8167bb0401938f1db86c57c54be01b7ae83c">提交历史</a></p><h2 id="API设计"><a href="#API设计" class="headerlink" title="API设计"></a>API设计</h2><h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><ul><li><p>tabs的子组件只能是tab组件</p></li><li><p>点击标签切换，动态渲染内容 – v-model:selected，动态组件</p></li><li><p>tab标签下横线移动，且长度根据标签宽度变化</p></li></ul><h3 id="用户怎么用该组件"><a href="#用户怎么用该组件" class="headerlink" title="用户怎么用该组件"></a>用户怎么用该组件</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">x-tabs</span> <span class="attr">v-model:selected</span>=<span class="string">&quot;selectTab&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">x-tab</span> <span class="attr">label</span>=<span class="string">&quot;星星&quot;</span> <span class="attr">name</span>=<span class="string">&quot;star&quot;</span>&gt;</span>一颗小星星<span class="tag">&lt;/<span class="name">x-tab</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">x-tab</span> <span class="attr">label</span>=<span class="string">&quot;羊&quot;</span> <span class="attr">name</span>=<span class="string">&quot;sheep&quot;</span>&gt;</span>羊羊羊<span class="tag">&lt;/<span class="name">x-tab</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">x-tab</span> <span class="attr">label</span>=<span class="string">&quot;咩咩&quot;</span> <span class="attr">name</span>=<span class="string">&quot;mie&quot;</span>&gt;</span>咩咩是全世界最可爱的猫咪<span class="tag">&lt;/<span class="name">x-tab</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">x-tabs</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><p>从需求出发，将每个需求分别拆分成几个小问题一一解决</p><h3 id="如何确认子组件的类型"><a href="#如何确认子组件的类型" class="headerlink" title="如何确认子组件的类型"></a>如何确认子组件的类型</h3><p>要解决这个问题，首先得知道如何拿到子组件。由于<code>Tab</code>组件都是通过默认插槽的形式和<code>Tabs</code>组件一起使用，因此只要拿到<code>Tabs</code>组件的插槽就可以了。</p><p>在<code>Vue2</code>中，是使用<code>$slots</code>来获取插槽。而在<code>Vue3</code>中，通过文档可知，<code>setup</code>函数接受的第二个参数<code>context</code>中，暴露了<code>slots</code>这个属性，因此可通过<code>context.slots</code>后获取插槽，再通过组件的name判断组件类型</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> defaults = context.slots.default()</span><br><span class="line">defaults.forEach(<span class="function"><span class="params">pane</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (pane.type.name !== <span class="string">&#x27;xx-tab&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;Tabs 子标签必须是 Tab 组件&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h3 id="如何动态渲染嵌套的组件"><a href="#如何动态渲染嵌套的组件" class="headerlink" title="如何动态渲染嵌套的组件"></a>如何动态渲染嵌套的组件</h3><p>拿到了默认插槽(<code>tab</code>组件)后，首先想到的是通过循环渲染，然后比较子组件的<code>name</code>属性和<code>selected</code>的值过滤未选中的组件内容。</p><p>然而这样会遇到一个问题：将<code>v-for</code>和<code>v-if</code>一起使用了。官方文档并<a href="https://vue3js.cn/docs/zh/style-guide/#%E9%81%BF%E5%85%8D-v-if-%E5%92%8C-v-for-%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8%E5%BF%85%E8%A6%81">不推荐这样做</a>。</p><p>因此，先通过计算属性拿到当前选中的组件，再通过动态组件渲染</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">&quot;currentTab&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;selected&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">setup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> currentTab = computed(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> defaults.filter(<span class="function"><span class="params">pane</span> =&gt;</span> pane.props.name === props.selected)[<span class="number">0</span>]</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> &#123; currentTab &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>注</strong>：如果<component/>渲染的内容改变，必须要将<code>key</code>标识也改变，否则将无法动态变化</p><h3 id="如何制作移动的导航条"><a href="#如何制作移动的导航条" class="headerlink" title="如何制作移动的导航条"></a>如何制作移动的导航条</h3><h4 id="确定标签导航的html结构"><a href="#确定标签导航的html结构" class="headerlink" title="确定标签导航的html结构"></a>确定标签导航的html结构</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;xx-tabs-nav&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 标签 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;xx-tabs-nav-item&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">v-for</span>=<span class="string">&quot;(pane,index) in tabPanes&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">:class</span>=<span class="string">&quot;&#123; selected: pane.name === selected &#125;&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">:key</span>=<span class="string">&quot;index&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;changeTab(pane.name)&quot;</span>&gt;</span></span><br><span class="line">    &#123;&#123; pane.label &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 导航条 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;xx-tabs-nav-indicator&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><p>根据需求，导航条的宽度应为当前选中标签的宽度，而导航条的位置应该是选中标签的left - 导航容器的left。那么问题就变成了：如何获取导航容器，导航条，选中标签这三个DOM元素呢？</p><h4 id="如何获取DOM元素"><a href="#如何获取DOM元素" class="headerlink" title="如何获取DOM元素"></a>如何获取DOM元素</h4><p>在<code>Vue2</code>中，可以使用<code>ref</code>和<code>$refs</code>来获取DOM元素，而在<code>Vue3</code>中有了新变化。如果在<code>v-for</code>中使用<code>ref</code>，需要将 <code>ref</code> 绑定到一个更灵活的函数上。</p><p>基于此，可以使用如下方式创建设置导航条属性的方法：</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;xx-tabs-nav&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;navContainer&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;xx-tabs-nav-item&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">v-for</span>=<span class="string">&quot;(pane,index) in tabPanes&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">:class</span>=<span class="string">&quot;&#123; selected: pane.name === selected &#125;&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">:ref</span>=<span class="string">&quot;el =&gt; &#123; if (pane.name === selected) selectedItem = el &#125;&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">:key</span>=<span class="string">&quot;index&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;changeTab(pane.name)&quot;</span>&gt;</span></span><br><span class="line">    &#123;&#123; pane.label &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;xx-tabs-nav-indicator&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;indicator&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">setup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> selectedItem = ref&lt;HTMLDivElement&gt;(<span class="literal">null</span>)</span><br><span class="line">    <span class="keyword">const</span> indicator = ref&lt;HTMLDivElement&gt;(<span class="literal">null</span>)</span><br><span class="line">    <span class="keyword">const</span> navContainer = ref&lt;HTMLDivElement&gt;(<span class="literal">null</span>)</span><br><span class="line">    <span class="keyword">const</span> getIndicatorAttr = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; width &#125; = selectedItem.value.getBoundingClientRect()</span><br><span class="line">      <span class="keyword">const</span> &#123; <span class="attr">left</span>: containerLeft &#125; = navContainer.value.getBoundingClientRect()</span><br><span class="line">      <span class="keyword">const</span> &#123; <span class="attr">left</span>: selectedItemLeft &#125; = selectedItem.value.getBoundingClientRect()</span><br><span class="line">      <span class="keyword">const</span> left = selectedItemLeft - containerLeft</span><br><span class="line">      indicator.value.style.left = left + <span class="string">&#x27;px&#x27;</span></span><br><span class="line">      indicator.value.style.width = width + <span class="string">&#x27;px&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> count = ref(<span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="如何实现宽度动态变化"><a href="#如何实现宽度动态变化" class="headerlink" title="如何实现宽度动态变化"></a>如何实现宽度动态变化</h4><p>很容易想到，当控制标签选中的变量<code>selected</code>发生变化后，生命周期函数<code>updated</code>即会执行，因此我们可以在组件挂载完成及更新完成时分别调用<code>getIndicatorAttr</code>方法实现宽度的动态变化。</p><p>在Vue 3中，可以使用直接导入的 <code>onX</code> 函数注册生命周期钩子：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted, onUpdated &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">setup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    onMounted(getIndicatorAttr)</span><br><span class="line">    onUpdated(getIndicatorAttr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="如何优化"><a href="#如何优化" class="headerlink" title="如何优化"></a>如何优化</h4><p>虽然需求已经实现，但问题又来了：这段代码还有没有优化空间呢？</p><p>于是想到，能不能通过<strong>监听<code>selected</code>的变化</strong>来实现<code>getIndicatorAttr</code>方法的调用呢？</p><p>查阅文档发现，Vue3还提供了一个新特性——<code>watchEffect</code>响应式追踪其依赖的变化。于是根据文档进行了尝试：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> count = ref(<span class="number">0</span>)</span><br><span class="line">onMounted(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;onMounted&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">watchEffect(<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(count.value))</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  count.value++</span><br><span class="line">&#125;, <span class="number">100</span>)</span><br><span class="line"><span class="comment">// -&gt; 0</span></span><br><span class="line"><span class="comment">// -&gt; onMounted</span></span><br><span class="line"><span class="comment">// -&gt; 1</span></span><br></pre></td></tr></table></figure><p>可以看到<code>watchEffect</code>会在<strong>onMounted执行前</strong>调用一次，并在所传入函数中的依赖发生变化时再次被调用。</p><p>但DOM元素在组件挂载完成后才能获取到，因此采取了这样的调用方式：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">onMounted(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  watchEffect(getIndicatorAttr())</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>然而，当我欣喜地期待着功能完美实现的时候，马上就打脸了：</p><p><img src="/images/vue3-tabs/tabs-bug.gif" alt="怎么不按剧本来呢"></p><h4 id="解决使用watchEffect的bug"><a href="#解决使用watchEffect的bug" class="headerlink" title="解决使用watchEffect的bug"></a>解决使用<code>watchEffect</code>的bug</h4><p>这是什么情况？马上打console看了看：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">onMounted(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;onMounted&#x27;</span>);</span><br><span class="line">  watchEffect(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(selectedItem.value);</span><br><span class="line">    getIndicatorAttr()</span><br><span class="line">  &#125;, &#123; <span class="attr">flush</span>:<span class="string">&#x27;pre&#x27;</span> &#125;) <span class="comment">// Vue3正式版默认flush为pre（即在渲染前执行watchEffect）</span></span><br><span class="line">&#125;)</span><br><span class="line">onUpdated(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;onUpdated&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p><img src="/images/vue3-tabs/tabs-console.gif"></p><p>重新梳理逻辑：</p><p><img src="/images/vue3-tabs/why.png"></p><p>原本是期望<code>selected</code>变化导致<code>selectedItem</code>变化，之后<code>watchEffect</code>执行，改变<code>indicator</code>位置。实际上却是：<code>watchEffect</code>在<code>selectedItem</code>变化前就执行了，发现其还未变化，因此传入的函数并未立即调用。</p><p>查阅文档发现确实如此：</p><blockquote><p>Vue 的响应性系统会缓存副作用函数，并异步地刷新它们，这样可以避免同一个“tick” 中多个状态改变导致的不必要的重复调用。在核心的具体实现中，组件的 <code>update</code> 函数也是一个被侦听的副作用。当一个用户定义的副作用函数进入队列时，默认情况下，会在所有的组件 <code>update</code> <strong>前</strong>执行</p></blockquote><p>文档也给出了相应的解决方案：</p><blockquote><p>如果需要在组件更新<strong>后</strong>重新运行侦听器副作用，可以传递带有 <code>flush</code> 选项的附加 <code>options</code> 对象 (默认为 <code>&#39;pre&#39;</code>)：</p></blockquote><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// fire before component updates</span></span><br><span class="line">watchEffect(</span><br><span class="line">  () =&gt; &#123;</span><br><span class="line">    getIndicatorAttr()</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    flush: <span class="string">&#x27;post&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p><img src="/images/vue3-tabs/success.gif" alt="问题解决~"></p><h2 id="Vue3笔记"><a href="#Vue3笔记" class="headerlink" title="Vue3笔记"></a>Vue3笔记</h2><h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><p>在 Vue 2 中，在 <code>v-for</code> 里使用的 <code>ref</code>  会用 ref 数组填充相应的 <code>$refs</code> property。当存在嵌套的 <code>v-for</code> 时，这种行为会变得不明确且效率低下。</p><p>在 Vue 3 中，这样的用法将不再在 <code>$ref</code> 中自动创建数组。如果要从单个绑定获取多个 ref，需将 <code>ref</code> 绑定到一个更灵活的函数上</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;item in list&quot;</span> <span class="attr">:ref</span>=<span class="string">&quot;setItemRef&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref, onBeforeUpdate, onUpdated &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> itemRefs = []</span><br><span class="line">    <span class="keyword">const</span> setItemRef = <span class="function"><span class="params">el</span> =&gt;</span> &#123;</span><br><span class="line">      itemRefs.push(el) <span class="comment">// 这里的el即为循环的DOM元素</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      itemRefs,</span><br><span class="line">      setItemRef</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h3><p><code>watch</code> 需要侦听特定的数据源，并在回调函数中执行副作用。默认情况下，它也是惰性的，即只有当被侦听的源发生变化时才执行回调</p><h4 id="侦听单个数据源"><a href="#侦听单个数据源" class="headerlink" title="侦听单个数据源"></a>侦听单个数据源</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 侦听一个 getter</span></span><br><span class="line"><span class="keyword">const</span> state = reactive(&#123; <span class="attr">count</span>: <span class="number">0</span> &#125;)</span><br><span class="line">watch(</span><br><span class="line">  () =&gt; state.count,</span><br><span class="line">  (count, prevCount) =&gt; &#123;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接侦听ref</span></span><br><span class="line"><span class="keyword">const</span> count = ref(<span class="number">0</span>)</span><br><span class="line">watch(count, <span class="function">(<span class="params">count, prevCount</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h4 id="侦听多个数据源"><a href="#侦听多个数据源" class="headerlink" title="侦听多个数据源"></a>侦听多个数据源</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">watch([fooRef, barRef], <span class="function">(<span class="params">[foo, bar], [prevFoo, prevBar]</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h3 id="watchEffect"><a href="#watchEffect" class="headerlink" title="watchEffect"></a>watchEffect</h3><p><code>watchEffect</code>方法接收的第一个参数：<code>effect</code>函数，用于定义副作用。他会立即执行传入的<code>effect</code>函数，同时响应式追踪其依赖，并在其依赖变更时重新运行该函数。</p><p>目的：为了根据响应式状态<em>自动应用</em>和<em>重新应用</em>副作用</p><blockquote><p>注：函数副作用是指当调用函数时，除了返回函数值之外，还对主调用函数产生附加的影响。副作用的函数不仅仅只是返回了一个值，而且还做了其他的事情</p></blockquote><p>如下代码中，副作用函数的作用是：当 <code>count</code> 被访问时，旋即在控制台打出日志。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> count = ref(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">watchEffect(<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(count.value))</span><br><span class="line"><span class="comment">// -&gt; logs 0</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  count.value++</span><br><span class="line">  <span class="comment">// -&gt; logs 1</span></span><br><span class="line">&#125;, <span class="number">100</span>)</span><br></pre></td></tr></table></figure><h4 id="副作用刷新时机"><a href="#副作用刷新时机" class="headerlink" title="副作用刷新时机"></a>副作用刷新时机</h4><p>默认情况下，会在所有的组件 <code>update</code> <strong>前</strong>执行，如果需要在组件更新<strong>后</strong>重新运行侦听器副作用，可以传递带有 <code>flush</code> 选项的附加 <code>options</code> 对象 (默认为 <code>&#39;pre&#39;</code>)</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// fire before component updates</span></span><br><span class="line">watchEffect(</span><br><span class="line">  () =&gt; &#123;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    flush: <span class="string">&#x27;post&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure><h4 id="停止侦听"><a href="#停止侦听" class="headerlink" title="停止侦听"></a>停止侦听</h4><p><code>watchEffect</code>会返回一个用于停止这个监听的函数。</p><ul><li><p>这个函数可以在组件被卸载时隐式调用：当 <code>watchEffect</code> 在组件的 setup() 函数或生命周期钩子被调用时，侦听器会被链接到该组件的生命周期，并在组件卸载时自动停止</p></li><li><p>也可以在<code>setup</code>函数里被显式调用，以停止侦听</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> stop = watchEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// later</span></span><br><span class="line">stop()</span><br></pre></td></tr></table></figure></li></ul><h4 id="清除副作用"><a href="#清除副作用" class="headerlink" title="清除副作用"></a>清除副作用</h4><p>有时副作用函数会执行一些异步的副作用，比如当数据变化时发送一次异步请求，如果请求过程中数据发生多次变化，那么就得多次发送请求。这样不仅浪费资源，还会因无法判断异步请求的执行顺序增加不确定性。</p><p>为了解决这个问题，<code>watchEffect</code>副作用传入的函数接收一个<code>onInvalidate</code>函数作为入参，用来注册清理失效时的回调。</p><p><code>onInvalidate</code>只作用于异步函数，并且只有在如下两种情况下才会被调用：</p><ul><li>副作用即将重新执行时</li><li>侦听器被停止 (如果在 <code>setup()</code> 或生命周期钩子函数中使用了 <code>watchEffect</code>，则在组件卸载时)</li></ul><p>我的理解中对异步副作用的清除就相当于<strong>函数防抖</strong>，执行这一次的副作用时，清理上一次的异步副作用，使得之前挂起的异步操作无效。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">watchEffect(<span class="function"><span class="params">onInvalidate</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 异步api调用，返回一个操作对象</span></span><br><span class="line">  <span class="keyword">const</span> token = performAsyncOperation(id.value)</span><br><span class="line">  onInvalidate(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 取消异步api的调用。</span></span><br><span class="line">    token.cancel()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>Vue3 之所以是通过传入一个函数去注册失效回调，而不是从回调返回它，是因为返回值对于异步错误处理很重要。</p><p>在执行数据请求时，副作用函数往往是一个异步函数：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> data = ref(<span class="literal">null</span>)</span><br><span class="line">watchEffect(<span class="keyword">async</span> onInvalidate =&gt; &#123;</span><br><span class="line">  onInvalidate(<span class="function">() =&gt;</span> &#123;...&#125;) <span class="comment">// 在Promise解析之前注册清除函数</span></span><br><span class="line">  data.value = <span class="keyword">await</span> fetchData(props.id)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h3 id="watchEffect和watch的区别"><a href="#watchEffect和watch的区别" class="headerlink" title="watchEffect和watch的区别"></a>watchEffect和watch的区别</h3><ul><li> <code>watchEffect</code> 不需要指定监听的属性，他会自动的收集依赖， 只要我们回调中引用到了 响应式的属性， 那么当这些属性变更的时候，这个回调都会执行，而 <code>watch</code> 只能监听指定的属性而做出变更(v3开始可以同时指定多个)。</li><li><code>watch</code> 访问侦听状态变化前后的值。</li><li><code>watch</code>可以懒执行回调：<code> watchEffect</code> 如果存在，组件初始化的时候就会执行一次用以收集依赖（与<code>computed</code>同理），而后收集到的依赖发生变化，这个回调才会再次执行，而 watch 不需要，因为他一开始就指定了依赖。</li></ul><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul><li>生命周期钩子：onMounted / onUpdated </li><li><code>v-for</code>中绑定<code>ref</code></li><li>watchEffect的使用（注意其副作用的刷新时机）</li></ul><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>官方文档：<a href="https://vue3js.cn/docs/zh/guide/reactivity-computed-watchers.html#watcheffect">https://vue3js.cn/docs/zh/guide/reactivity-computed-watchers.html#watcheffect</a></p><p><a href="https://www.jianshu.com/p/a8fdf52d0bcf">https://www.jianshu.com/p/a8fdf52d0bcf</a></p><p><a href="https://segmentfault.com/a/1190000023669309">https://segmentfault.com/a/1190000023669309</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;效果预览&quot;&gt;&lt;a href=&quot;#效果预览&quot; class=&quot;headerlink&quot; title=&quot;效果预览&quot;&gt;&lt;/a&gt;效果预览&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/images/vue3-tabs/tabs.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https:/</summary>
+      
+    
+    
+    
+    <category term="Vue" scheme="https://wuyangqin.github.io/categories/Vue/"/>
+    
+    <category term="Vue3" scheme="https://wuyangqin.github.io/categories/Vue/Vue3/"/>
+    
+    
+    <category term="Vue" scheme="https://wuyangqin.github.io/tags/Vue/"/>
+    
+    <category term="造轮子" scheme="https://wuyangqin.github.io/tags/%E9%80%A0%E8%BD%AE%E5%AD%90/"/>
+    
+    <category term="Vue3" scheme="https://wuyangqin.github.io/tags/Vue3/"/>
     
   </entry>
   
   <entry>
     <title>Vue3造轮子（三）-Dialog组件</title>
-    <link href="https://amiemie906.gitee.io/2021/03/07/Vue3-3-dialog/"/>
-    <id>https://amiemie906.gitee.io/2021/03/07/Vue3-3-dialog/</id>
+    <link href="https://wuyangqin.github.io/2021/03/07/Vue3-3-dialog/"/>
+    <id>https://wuyangqin.github.io/2021/03/07/Vue3-3-dialog/</id>
     <published>2021-03-07T15:31:05.000Z</published>
     <updated>2021-04-01T07:34:25.921Z</updated>
     
@@ -84,23 +171,23 @@
     
     
     
-    <category term="Vue" scheme="https://amiemie906.gitee.io/categories/Vue/"/>
+    <category term="Vue" scheme="https://wuyangqin.github.io/categories/Vue/"/>
     
-    <category term="Vue3" scheme="https://amiemie906.gitee.io/categories/Vue/Vue3/"/>
+    <category term="Vue3" scheme="https://wuyangqin.github.io/categories/Vue/Vue3/"/>
     
     
-    <category term="Vue" scheme="https://amiemie906.gitee.io/tags/Vue/"/>
+    <category term="Vue" scheme="https://wuyangqin.github.io/tags/Vue/"/>
     
-    <category term="Vue3" scheme="https://amiemie906.gitee.io/tags/Vue3/"/>
+    <category term="造轮子" scheme="https://wuyangqin.github.io/tags/%E9%80%A0%E8%BD%AE%E5%AD%90/"/>
     
-    <category term="造轮子" scheme="https://amiemie906.gitee.io/tags/%E9%80%A0%E8%BD%AE%E5%AD%90/"/>
+    <category term="Vue3" scheme="https://wuyangqin.github.io/tags/Vue3/"/>
     
   </entry>
   
   <entry>
     <title>Vue3造轮子（二）-Button组件</title>
-    <link href="https://amiemie906.gitee.io/2021/02/27/Vue3-2-button/"/>
-    <id>https://amiemie906.gitee.io/2021/02/27/Vue3-2-button/</id>
+    <link href="https://wuyangqin.github.io/2021/02/27/Vue3-2-button/"/>
+    <id>https://wuyangqin.github.io/2021/02/27/Vue3-2-button/</id>
     <published>2021-02-27T14:55:13.000Z</published>
     <updated>2021-04-01T02:50:50.258Z</updated>
     
@@ -115,23 +202,23 @@
     
     
     
-    <category term="Vue" scheme="https://amiemie906.gitee.io/categories/Vue/"/>
+    <category term="Vue" scheme="https://wuyangqin.github.io/categories/Vue/"/>
     
-    <category term="Vue3" scheme="https://amiemie906.gitee.io/categories/Vue/Vue3/"/>
+    <category term="Vue3" scheme="https://wuyangqin.github.io/categories/Vue/Vue3/"/>
     
     
-    <category term="Vue" scheme="https://amiemie906.gitee.io/tags/Vue/"/>
+    <category term="Vue" scheme="https://wuyangqin.github.io/tags/Vue/"/>
     
-    <category term="Vue3" scheme="https://amiemie906.gitee.io/tags/Vue3/"/>
+    <category term="造轮子" scheme="https://wuyangqin.github.io/tags/%E9%80%A0%E8%BD%AE%E5%AD%90/"/>
     
-    <category term="造轮子" scheme="https://amiemie906.gitee.io/tags/%E9%80%A0%E8%BD%AE%E5%AD%90/"/>
+    <category term="Vue3" scheme="https://wuyangqin.github.io/tags/Vue3/"/>
     
   </entry>
   
   <entry>
     <title>Vue3造轮子（一）-Switch组件</title>
-    <link href="https://amiemie906.gitee.io/2021/02/20/Vue3-1-switch/"/>
-    <id>https://amiemie906.gitee.io/2021/02/20/Vue3-1-switch/</id>
+    <link href="https://wuyangqin.github.io/2021/02/20/Vue3-1-switch/"/>
+    <id>https://wuyangqin.github.io/2021/02/20/Vue3-1-switch/</id>
     <published>2021-02-20T15:25:49.000Z</published>
     <updated>2021-04-01T02:49:57.760Z</updated>
     
@@ -145,23 +232,23 @@
     
     
     
-    <category term="Vue" scheme="https://amiemie906.gitee.io/categories/Vue/"/>
+    <category term="Vue" scheme="https://wuyangqin.github.io/categories/Vue/"/>
     
-    <category term="Vue3" scheme="https://amiemie906.gitee.io/categories/Vue/Vue3/"/>
+    <category term="Vue3" scheme="https://wuyangqin.github.io/categories/Vue/Vue3/"/>
     
     
-    <category term="Vue" scheme="https://amiemie906.gitee.io/tags/Vue/"/>
+    <category term="Vue" scheme="https://wuyangqin.github.io/tags/Vue/"/>
     
-    <category term="Vue3" scheme="https://amiemie906.gitee.io/tags/Vue3/"/>
+    <category term="造轮子" scheme="https://wuyangqin.github.io/tags/%E9%80%A0%E8%BD%AE%E5%AD%90/"/>
     
-    <category term="造轮子" scheme="https://amiemie906.gitee.io/tags/%E9%80%A0%E8%BD%AE%E5%AD%90/"/>
+    <category term="Vue3" scheme="https://wuyangqin.github.io/tags/Vue3/"/>
     
   </entry>
   
   <entry>
     <title>iOS正则兼容，报错safari invalid regular expression</title>
-    <link href="https://amiemie906.gitee.io/2020/11/30/keng-ios-reg/"/>
-    <id>https://amiemie906.gitee.io/2020/11/30/keng-ios-reg/</id>
+    <link href="https://wuyangqin.github.io/2020/11/30/keng-ios-reg/"/>
+    <id>https://wuyangqin.github.io/2020/11/30/keng-ios-reg/</id>
     <published>2020-11-30T13:09:49.000Z</published>
     <updated>2021-03-25T10:01:54.204Z</updated>
     
@@ -176,23 +263,23 @@
     
     
     
-    <category term="踩坑记" scheme="https://amiemie906.gitee.io/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0/"/>
+    <category term="踩坑记" scheme="https://wuyangqin.github.io/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0/"/>
     
-    <category term="移动端" scheme="https://amiemie906.gitee.io/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    <category term="移动端" scheme="https://wuyangqin.github.io/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
     
     
-    <category term="踩坑记" scheme="https://amiemie906.gitee.io/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/"/>
+    <category term="踩坑记" scheme="https://wuyangqin.github.io/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/"/>
     
-    <category term="移动端" scheme="https://amiemie906.gitee.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    <category term="移动端" scheme="https://wuyangqin.github.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
     
-    <category term="正则" scheme="https://amiemie906.gitee.io/tags/%E6%AD%A3%E5%88%99/"/>
+    <category term="正则" scheme="https://wuyangqin.github.io/tags/%E6%AD%A3%E5%88%99/"/>
     
   </entry>
   
   <entry>
     <title>简单实现一个ajax</title>
-    <link href="https://amiemie906.gitee.io/2020/10/02/js-ajax/"/>
-    <id>https://amiemie906.gitee.io/2020/10/02/js-ajax/</id>
+    <link href="https://wuyangqin.github.io/2020/10/02/js-ajax/"/>
+    <id>https://wuyangqin.github.io/2020/10/02/js-ajax/</id>
     <published>2020-10-02T05:50:01.000Z</published>
     <updated>2021-04-02T03:32:01.658Z</updated>
     
@@ -206,19 +293,19 @@
     
     
     
-    <category term="JavaScript" scheme="https://amiemie906.gitee.io/categories/JavaScript/"/>
+    <category term="JavaScript" scheme="https://wuyangqin.github.io/categories/JavaScript/"/>
     
     
-    <category term="JavaScript" scheme="https://amiemie906.gitee.io/tags/JavaScript/"/>
+    <category term="JavaScript" scheme="https://wuyangqin.github.io/tags/JavaScript/"/>
     
-    <category term="ajax" scheme="https://amiemie906.gitee.io/tags/ajax/"/>
+    <category term="ajax" scheme="https://wuyangqin.github.io/tags/ajax/"/>
     
   </entry>
   
   <entry>
     <title>函数节流与函数防抖</title>
-    <link href="https://amiemie906.gitee.io/2020/10/02/js-throttle-and-debounce/"/>
-    <id>https://amiemie906.gitee.io/2020/10/02/js-throttle-and-debounce/</id>
+    <link href="https://wuyangqin.github.io/2020/10/02/js-throttle-and-debounce/"/>
+    <id>https://wuyangqin.github.io/2020/10/02/js-throttle-and-debounce/</id>
     <published>2020-10-02T03:21:34.000Z</published>
     <updated>2021-04-02T02:09:51.190Z</updated>
     
@@ -233,19 +320,19 @@
     
     
     
-    <category term="JavaScript" scheme="https://amiemie906.gitee.io/categories/JavaScript/"/>
+    <category term="JavaScript" scheme="https://wuyangqin.github.io/categories/JavaScript/"/>
     
     
-    <category term="JavaScript" scheme="https://amiemie906.gitee.io/tags/JavaScript/"/>
+    <category term="JavaScript" scheme="https://wuyangqin.github.io/tags/JavaScript/"/>
     
-    <category term="性能优化" scheme="https://amiemie906.gitee.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    <category term="性能优化" scheme="https://wuyangqin.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>this的值是什么？</title>
-    <link href="https://amiemie906.gitee.io/2020/09/30/js-this/"/>
-    <id>https://amiemie906.gitee.io/2020/09/30/js-this/</id>
+    <link href="https://wuyangqin.github.io/2020/09/30/js-this/"/>
+    <id>https://wuyangqin.github.io/2020/09/30/js-this/</id>
     <published>2020-09-30T14:12:57.000Z</published>
     <updated>2021-04-02T03:41:32.342Z</updated>
     
@@ -259,19 +346,19 @@
     
     
     
-    <category term="JavaScript" scheme="https://amiemie906.gitee.io/categories/JavaScript/"/>
+    <category term="JavaScript" scheme="https://wuyangqin.github.io/categories/JavaScript/"/>
     
     
-    <category term="JavaScript" scheme="https://amiemie906.gitee.io/tags/JavaScript/"/>
+    <category term="JavaScript" scheme="https://wuyangqin.github.io/tags/JavaScript/"/>
     
-    <category term="this" scheme="https://amiemie906.gitee.io/tags/this/"/>
+    <category term="this" scheme="https://wuyangqin.github.io/tags/this/"/>
     
   </entry>
   
   <entry>
     <title>Vue - 路由基础</title>
-    <link href="https://amiemie906.gitee.io/2020/09/27/Vue-router/"/>
-    <id>https://amiemie906.gitee.io/2020/09/27/Vue-router/</id>
+    <link href="https://wuyangqin.github.io/2020/09/27/Vue-router/"/>
+    <id>https://wuyangqin.github.io/2020/09/27/Vue-router/</id>
     <published>2020-09-27T10:45:12.000Z</published>
     <updated>2021-03-29T03:14:36.882Z</updated>
     
@@ -285,21 +372,21 @@
     
     
     
-    <category term="Vue" scheme="https://amiemie906.gitee.io/categories/Vue/"/>
+    <category term="Vue" scheme="https://wuyangqin.github.io/categories/Vue/"/>
     
-    <category term="Vue2" scheme="https://amiemie906.gitee.io/categories/Vue/Vue2/"/>
+    <category term="Vue2" scheme="https://wuyangqin.github.io/categories/Vue/Vue2/"/>
     
     
-    <category term="Vue" scheme="https://amiemie906.gitee.io/tags/Vue/"/>
+    <category term="Vue" scheme="https://wuyangqin.github.io/tags/Vue/"/>
     
-    <category term="Vue2" scheme="https://amiemie906.gitee.io/tags/Vue2/"/>
+    <category term="Vue2" scheme="https://wuyangqin.github.io/tags/Vue2/"/>
     
   </entry>
   
   <entry>
     <title>Vue - 组件通信</title>
-    <link href="https://amiemie906.gitee.io/2020/09/27/Vue-components-communication/"/>
-    <id>https://amiemie906.gitee.io/2020/09/27/Vue-components-communication/</id>
+    <link href="https://wuyangqin.github.io/2020/09/27/Vue-components-communication/"/>
+    <id>https://wuyangqin.github.io/2020/09/27/Vue-components-communication/</id>
     <published>2020-09-27T04:25:49.000Z</published>
     <updated>2021-03-29T02:22:11.544Z</updated>
     
@@ -313,21 +400,21 @@
     
     
     
-    <category term="Vue" scheme="https://amiemie906.gitee.io/categories/Vue/"/>
+    <category term="Vue" scheme="https://wuyangqin.github.io/categories/Vue/"/>
     
-    <category term="Vue2" scheme="https://amiemie906.gitee.io/categories/Vue/Vue2/"/>
+    <category term="Vue2" scheme="https://wuyangqin.github.io/categories/Vue/Vue2/"/>
     
     
-    <category term="Vue" scheme="https://amiemie906.gitee.io/tags/Vue/"/>
+    <category term="Vue" scheme="https://wuyangqin.github.io/tags/Vue/"/>
     
-    <category term="Vue2" scheme="https://amiemie906.gitee.io/tags/Vue2/"/>
+    <category term="Vue2" scheme="https://wuyangqin.github.io/tags/Vue2/"/>
     
   </entry>
   
   <entry>
     <title>Vue - computed和watch的区别</title>
-    <link href="https://amiemie906.gitee.io/2020/09/27/Vue-computed-vs-watch/"/>
-    <id>https://amiemie906.gitee.io/2020/09/27/Vue-computed-vs-watch/</id>
+    <link href="https://wuyangqin.github.io/2020/09/27/Vue-computed-vs-watch/"/>
+    <id>https://wuyangqin.github.io/2020/09/27/Vue-computed-vs-watch/</id>
     <published>2020-09-27T02:25:49.000Z</published>
     <updated>2021-03-29T01:49:43.021Z</updated>
     
@@ -342,21 +429,21 @@
     
     
     
-    <category term="Vue" scheme="https://amiemie906.gitee.io/categories/Vue/"/>
+    <category term="Vue" scheme="https://wuyangqin.github.io/categories/Vue/"/>
     
-    <category term="Vue2" scheme="https://amiemie906.gitee.io/categories/Vue/Vue2/"/>
+    <category term="Vue2" scheme="https://wuyangqin.github.io/categories/Vue/Vue2/"/>
     
     
-    <category term="Vue" scheme="https://amiemie906.gitee.io/tags/Vue/"/>
+    <category term="Vue" scheme="https://wuyangqin.github.io/tags/Vue/"/>
     
-    <category term="Vue2" scheme="https://amiemie906.gitee.io/tags/Vue2/"/>
+    <category term="Vue2" scheme="https://wuyangqin.github.io/tags/Vue2/"/>
     
   </entry>
   
   <entry>
     <title>ES6知识点总结</title>
-    <link href="https://amiemie906.gitee.io/2020/09/26/es6-notes/"/>
-    <id>https://amiemie906.gitee.io/2020/09/26/es6-notes/</id>
+    <link href="https://wuyangqin.github.io/2020/09/26/es6-notes/"/>
+    <id>https://wuyangqin.github.io/2020/09/26/es6-notes/</id>
     <published>2020-09-26T07:32:01.000Z</published>
     <updated>2021-04-02T02:16:08.740Z</updated>
     
@@ -370,17 +457,17 @@
     
     
     
-    <category term="ES6" scheme="https://amiemie906.gitee.io/categories/ES6/"/>
+    <category term="ES6" scheme="https://wuyangqin.github.io/categories/ES6/"/>
     
     
-    <category term="ES6" scheme="https://amiemie906.gitee.io/tags/ES6/"/>
+    <category term="ES6" scheme="https://wuyangqin.github.io/tags/ES6/"/>
     
   </entry>
   
   <entry>
     <title>Promise的认识和使用</title>
-    <link href="https://amiemie906.gitee.io/2020/09/24/es6-promise-base/"/>
-    <id>https://amiemie906.gitee.io/2020/09/24/es6-promise-base/</id>
+    <link href="https://wuyangqin.github.io/2020/09/24/es6-promise-base/"/>
+    <id>https://wuyangqin.github.io/2020/09/24/es6-promise-base/</id>
     <published>2020-09-24T13:09:49.000Z</published>
     <updated>2021-03-29T08:45:18.832Z</updated>
     
@@ -394,19 +481,19 @@
     
     
     
-    <category term="ES6" scheme="https://amiemie906.gitee.io/categories/ES6/"/>
+    <category term="ES6" scheme="https://wuyangqin.github.io/categories/ES6/"/>
     
     
-    <category term="ES6" scheme="https://amiemie906.gitee.io/tags/ES6/"/>
+    <category term="ES6" scheme="https://wuyangqin.github.io/tags/ES6/"/>
     
-    <category term="Promise" scheme="https://amiemie906.gitee.io/tags/Promise/"/>
+    <category term="Promise" scheme="https://wuyangqin.github.io/tags/Promise/"/>
     
   </entry>
   
   <entry>
     <title>Git总结</title>
-    <link href="https://amiemie906.gitee.io/2020/09/22/git-notes/"/>
-    <id>https://amiemie906.gitee.io/2020/09/22/git-notes/</id>
+    <link href="https://wuyangqin.github.io/2020/09/22/git-notes/"/>
+    <id>https://wuyangqin.github.io/2020/09/22/git-notes/</id>
     <published>2020-09-22T14:32:01.000Z</published>
     <updated>2021-03-29T02:15:25.095Z</updated>
     
@@ -421,10 +508,10 @@
     
     
     
-    <category term="git" scheme="https://amiemie906.gitee.io/categories/git/"/>
+    <category term="git" scheme="https://wuyangqin.github.io/categories/git/"/>
     
     
-    <category term="git" scheme="https://amiemie906.gitee.io/tags/git/"/>
+    <category term="git" scheme="https://wuyangqin.github.io/tags/git/"/>
     
   </entry>
   
