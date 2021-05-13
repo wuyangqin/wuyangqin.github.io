@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wuyangqin.github.io/2021/05/13/Vue-vuex-mini/</loc>
+    
+    <lastmod>2021-05-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/2021/03/31/node-notes-2-fs/</loc>
+    
+    <lastmod>2021-05-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/2021/03/24/node-notes-1-intro/</loc>
+    
+    <lastmod>2021-05-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/2020/09/24/es6-async-await/</loc>
+    
+    <lastmod>2021-05-13</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wuyangqin.github.io/2021/05/12/Vue-router%20-mini/</loc>
     
     <lastmod>2021-05-12</lastmod>
@@ -107,13 +135,6 @@
   </url>
   
   <url>
-    <loc>https://wuyangqin.github.io/2020/09/24/es6-async-await/</loc>
-    
-    <lastmod>2021-04-14</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://wuyangqin.github.io/2021/03/19/Vue3-ui-notes/</loc>
     
     <lastmod>2021-04-14</lastmod>
@@ -124,20 +145,6 @@
     <loc>https://wuyangqin.github.io/2021/03/16/Vue3-4-tabs/</loc>
     
     <lastmod>2021-04-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuyangqin.github.io/2021/03/31/node-notes-2-fs/</loc>
-    
-    <lastmod>2021-04-13</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuyangqin.github.io/2021/03/24/node-notes-1-intro/</loc>
-    
-    <lastmod>2021-04-13</lastmod>
     
   </url>
   
@@ -263,7 +270,7 @@
 
   <url>
     <loc>https://wuyangqin.github.io/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -271,154 +278,161 @@
   
   <url>
     <loc>https://wuyangqin.github.io/tags/Vue/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/Vue2/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/Vue-Router/</loc>
-    <lastmod>2021-05-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wuyangqin.github.io/tags/%E9%80%A0%E8%BD%AE%E5%AD%90/</loc>
-    <lastmod>2021-05-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wuyangqin.github.io/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2021-05-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wuyangqin.github.io/tags/Vue3/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/Echarts/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/react/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/tags/Vuex/</loc>
+    <lastmod>2021-05-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/tags/%E9%80%A0%E8%BD%AE%E5%AD%90/</loc>
+    <lastmod>2021-05-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2021-05-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/tags/Vue3/</loc>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/ES6/</loc>
-    <lastmod>2021-05-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wuyangqin.github.io/tags/Promise/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/git/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/tags/Promise/</loc>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/JavaScript/</loc>
-    <lastmod>2021-05-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wuyangqin.github.io/tags/ajax/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/DOM/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/tags/ajax/</loc>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/this/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
-    <lastmod>2021-05-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wuyangqin.github.io/tags/node/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/%E6%AD%A3%E5%88%99/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/tags/Node-js/</loc>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/tags/webpack/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -427,84 +441,77 @@
   
   <url>
     <loc>https://wuyangqin.github.io/categories/Vue/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/categories/Vue/Vue2/</loc>
-    <lastmod>2021-05-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wuyangqin.github.io/categories/Vue/Vue3/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/categories/Echarts/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/categories/Vue/Vue3/</loc>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/categories/ES6/</loc>
-    <lastmod>2021-05-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wuyangqin.github.io/categories/ES6async%E6%A6%82%E5%BF%B5/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/categories/git/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/categories/JavaScript/</loc>
-    <lastmod>2021-05-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wuyangqin.github.io/categories/node/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0/</loc>
-    <lastmod>2021-05-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wuyangqin.github.io/categories/webpack/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://wuyangqin.github.io/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0/%E7%A7%BB%E5%8A%A8%E7%AB%AF/</loc>
-    <lastmod>2021-05-12</lastmod>
+    <lastmod>2021-05-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/categories/Node-js/</loc>
+    <lastmod>2021-05-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wuyangqin.github.io/categories/webpack/</loc>
+    <lastmod>2021-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
